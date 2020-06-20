@@ -1,0 +1,15 @@
+#Print setting(travel(mm/sec))
+Layer_Height:20
+Layer_Width:20
+Travel_Speed:100
+
+#Printer setting
+Nozzle_cross_section:706.9
+Pump_MAX_RPM:300
+Pump_motor_deg/step:0.024
+Pump_motor_reduction_ratio:30
+
+#PrintBed size
+BedsizeX:600
+BedsizeY:1300
+BedsizeZ:800

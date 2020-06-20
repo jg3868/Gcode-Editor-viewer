@@ -1,0 +1,13 @@
+Start_code
+;M104 S210
+M105 ;Report temp
+;M109 S210
+M82 ;G91をオーバーライドし、E軸をアブソリュートモード(他の軸に依存しない)に E0化？
+G28 ;Home
+G0 Z50.0 F500 ;捨て出し移動
+G92 E0 ;Reset Extruder
+G1 E100 F2000 ;捨て出し
+G92 E0 ;吐出量リセット
+;LAYER_COUNT:43
+;LAYER:0
+M107 ;Fan Off(printCooling fan)
