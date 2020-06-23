@@ -1,4 +1,3 @@
-End_code
 M104 S0
 M140 S0
 ;Retract the filament
