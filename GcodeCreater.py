@@ -126,7 +126,7 @@ def line_print(config_list): #壁Gcode生成
 
     if (Line_hight % config_list[5]) != 0: #レイヤー数(Total_layer_No)、最終レイヤー高さを算出(Last_layer_hight)
         #合計レイヤー数算出(割り切れない場合)
-        if (Line_hight % config_list[5]) >= (config_list[5]*0.2) and not (Line_hight % config_list[5]) < Min_Layer_Height:
+        if (Line_hight % config_list[5]) >= (config_list[5]*0.2) and not (Line_hight % config_list[5]) < config_list[10]:
             #余り高さが、設定レイヤー高さ*20%より大きい場合、レイヤー最低高さより大きい場合は、もう１レイヤー印刷する。
             Last_layer_hight = Line_hight % config_list[5]
             Total_layer_No = (Line_hight // config_list[4]) + 1 

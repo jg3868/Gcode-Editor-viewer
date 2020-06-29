@@ -1,6 +1,6 @@
 #Print setting(travel(mm/sec))
-Layer_Height:20
-Layer_Width:20
+Layer_Height:15
+Layer_Width:30
 Min_Layer_Height:8
 Travel_Speed:100.0
 
@@ -10,10 +10,10 @@ Nozzle_cross_section:702.25
 Pump_MAX_RPM:300
 Pump_motor_deg/step:0.024
 Pump_motor_reduction_ratio:30
-Pump_Steps_per_unit:187.52
+Pump_Steps_per_unit:80
 #1mm吐出あたりのステップ数
 
 #PrintBed size mm
 BedsizeX:600
 BedsizeY:1300
-BedsizeZ:800
+BedsizeZ:860
