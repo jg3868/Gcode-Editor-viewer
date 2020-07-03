@@ -2,6 +2,10 @@ import tkinter, tkinter.filedialog, tkinter.messagebox
 import os
 import csv
 
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
 filetype = [("", "*.gcode")]
 dirpath = os.path.abspath(os.path.dirname(__file__))
 filepath = tkinter.filedialog.askopenfilename(filetypes = filetype, initialdir = dirpath)
@@ -43,10 +47,10 @@ temp_point_data = [0,0,0,0,0] #(X,Y,Z,E,F)
 for gcode in g_line:   #Gcodeデータ各行ごとにループ
     lineNo+=1
     if (check_index(gcode_com,(gcode.split())[0])) is not False :    #Gcode説明文をリスト化して作成。読み込んだGcodeに対応し、g_line_mean[行数]で各Gcodeの説明を取得できる。
-        print("No. ",lineNo," ",gcode," - ",gcode_mean[check_index(gcode_com,(gcode.split())[0])])
+        #print("No. ",lineNo," ",gcode," - ",gcode_mean[check_index(gcode_com,(gcode.split())[0])])
         g_line_mean.append(gcode_mean[check_index(gcode_com,(gcode.split())[0])])
     else :
-        print("No. ",lineNo,gcode)
+        #print("No. ",lineNo,gcode)
         g_line_mean.append("")
 
     if (gcode.split())[0] == "G28": #G28 オートホーム時にはゼロ代入
@@ -75,5 +79,32 @@ for gcode in g_line:   #Gcodeデータ各行ごとにループ
                 temp_point_data[4] = data.replace("F","")
         #print("一時データ：",temp_point_data)
         move_point.append(list(temp_point_data)) #収集した座標データを配列として保存
-    if len(move_point) is not 0:
-        print("X:",move_point[-1][0],"/ Y:",move_point[-1][1],"/ Z:",move_point[-1][2],"/ E:",move_point[-1][3],"/ F:",move_point[-1][4])
+    #if len(move_point) is not 0:
+        #print("X:",move_point[-1][0],"/ Y:",move_point[-1][1],"/ Z:",move_point[-1][2],"/ E:",move_point[-1][3],"/ F:",move_point[-1][4]) #収集した座標データを表示
+
+x = []
+y = []
+z = []
+#収集した座標データから重複するものを消去
+for data in range(len(move_point)):
+    if move_point[data] == move_point[-1]:  #最後かどうかを判別
+        break
+
+    if move_point[data] == move_point[data+1] :     #重複した場合、消去
+        move_point.pop(data+1)
+    
+    x.append(float(move_point[data][0]))
+    y.append(float(move_point[data][1]))
+    z.append(float(move_point[data][2]))
+    print("X:",move_point[data][0],"/ Y:",move_point[data][1],"/ Z:",move_point[data][2],"/ E:",move_point[data][3],"/ F:",move_point[data][4]) #収集した座標データを表示
+
+# 3Dでプロット
+fig = plt.figure()
+ax = Axes3D(fig)
+ax.plot(x, y, z, "o-", color="red")
+# 軸ラベル
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+# 表示
+plt.show()
